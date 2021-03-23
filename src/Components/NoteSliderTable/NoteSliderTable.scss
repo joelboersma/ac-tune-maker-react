@@ -1,0 +1,22 @@
+$borderColor: green;
+
+.NoteSliderTable {
+    border: 2px solid $borderColor;
+    border-radius: 20px;
+    height: 80vh;
+}
+
+.NoteSliderTableRow {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px 0 10px;
+    height: 50%;
+}
+
+#Row1 {
+    border-bottom: 1px solid $borderColor;
+}
+
+#Row2 {
+    border-top: 1px solid $borderColor;
+}

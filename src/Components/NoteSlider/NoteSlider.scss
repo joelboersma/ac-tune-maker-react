@@ -1,0 +1,40 @@
+$thumbRadius: 100px;
+
+.NoteSlider {
+    // height: 200px;
+    width: $thumbRadius;
+    color: white;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SimpleThumb {
+    width: $thumbRadius;
+    height: $thumbRadius;
+    border-radius: 50%;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    
+    :onclick {
+        border: none;
+    }
+}
+
+.SimpleTrack {
+    width: 5px;
+    background-color: gray;
+    color: gray;
+    border-radius: 999px;
+}
+
+// .SimpleMark {
+//     background-color: pink;
+//     width: 7px;
+//     height: 7px;
+//     border-radius: 50%;
+// }

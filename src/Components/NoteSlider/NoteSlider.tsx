@@ -1,17 +1,38 @@
 import React from 'react'
 import ReactSlider from 'react-slider'
+import './NoteSlider.scss'
+
+enum SliderValue {
+  Sleep,
+  Hold,
+  g,
+  a,
+  b,
+  c,
+  d,
+  e,
+  f,
+  G,
+  A,
+  B,
+  C,
+  D,
+  E,
+  Random
+}
 
 function NoteSlider() {
   return (
     <ReactSlider
-      className="horizontal-slider"
+      className="NoteSlider"
       marks
-      markClassName="example-mark"
-      min={0}
-      max={9}
+      markClassName="SimpleMark"
+      min={SliderValue.Sleep}
+      max={SliderValue.Random}
       orientation="vertical"
-      thumbClassName="example-thumb"
-      trackClassName="example-track"
+      invert
+      thumbClassName="SimpleThumb"
+      trackClassName="SimpleTrack"
       renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
     />
   );
