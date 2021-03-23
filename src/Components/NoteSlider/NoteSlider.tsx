@@ -33,7 +33,7 @@ function NoteSlider() {
       invert
       thumbClassName="SimpleThumb"
       trackClassName="SimpleTrack"
-      renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+      renderThumb={(props, state) => <div {...props}>{SliderValue[state.valueNow]}</div>}
     />
   );
 }
