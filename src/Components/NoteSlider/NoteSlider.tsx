@@ -21,18 +21,29 @@ enum SliderValue {
   Random
 }
 
+function sliderValueChanged(val: number | number[] | null | undefined) {
+  if (val as number >= 0) {
+    const num = Number(val)
+    console.log('onChange value:', SliderValue[num])
+  }
+  else {
+    console.error("Error: slider returned non-number value:", val, typeof val)
+  }
+}
+
 function NoteSlider() {
   return (
     <ReactSlider
       className="NoteSlider"
       marks
-      markClassName="SimpleMark"
       min={SliderValue.Sleep}
       max={SliderValue.Random}
-      orientation="vertical"
-      invert
+      markClassName="SimpleMark"
       thumbClassName="SimpleThumb"
       trackClassName="SimpleTrack"
+      orientation="vertical"
+      invert
+      onChange={sliderValueChanged}
       renderThumb={(props, state) => <div {...props}>{SliderValue[state.valueNow]}</div>}
     />
   );
