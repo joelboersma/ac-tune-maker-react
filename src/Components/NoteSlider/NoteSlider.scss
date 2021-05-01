@@ -8,6 +8,11 @@ $thumbRadius: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    :focus {
+        outline: none;
+        background-color: rgb(72, 72, 255);
+    }
 }
 
 .SimpleThumb {
@@ -19,10 +24,6 @@ $thumbRadius: 100px;
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    
-    :onclick {
-        border: none;
-    }
 }
 
 .SimpleTrack {
