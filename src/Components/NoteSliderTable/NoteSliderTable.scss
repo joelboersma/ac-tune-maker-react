@@ -1,6 +1,8 @@
 $borderColor: green;
 
 .NoteSliderTable {
+    display: grid;
+    grid-template: 1fr 1fr / repeat(8, 1fr);
     border: 2px solid $borderColor;
     border-radius: 20px;
     height: 80vh;
