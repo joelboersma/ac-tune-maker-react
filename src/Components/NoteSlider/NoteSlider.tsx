@@ -28,8 +28,8 @@ interface SliderProps {
 
 function sliderValueChanged(val: number | number[] | null | undefined) {
   if (val as number >= 0) {
-    const num = Number(val)
-    console.log('onChange value:', SliderValue[num])
+    // const num = Number(val)
+    // console.log('onChange value:', SliderValue[num])
   }
   else {
     console.error("Error: slider returned non-number value:", val, typeof val)
