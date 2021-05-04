@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import ReactSlider from 'react-slider'
 import './NoteSlider.scss'
 
@@ -21,6 +21,11 @@ enum SliderValue {
   Random
 }
 
+interface SliderProps {
+  id: number;
+  value?: SliderValue;
+}
+
 function sliderValueChanged(val: number | number[] | null | undefined) {
   if (val as number >= 0) {
     const num = Number(val)
@@ -31,7 +36,14 @@ function sliderValueChanged(val: number | number[] | null | undefined) {
   }
 }
 
-function NoteSlider() {
+const NoteSlider: FC <SliderProps> = (props: SliderProps) => {
+  let value;
+  if (props.value === undefined) {
+    value = 0;
+  }
+  else {
+    value = props.value;
+  }
   return (
     <ReactSlider
       className="NoteSlider"
@@ -45,6 +57,7 @@ function NoteSlider() {
       invert
       onChange={sliderValueChanged}
       renderThumb={(props, state) => <div {...props}>{SliderValue[state.valueNow]}</div>}
+      value={value}
     />
   );
 }
