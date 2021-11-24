@@ -5,7 +5,10 @@ $borderColor: green;
     grid-template: 1fr 1fr / repeat(8, 1fr);
     border: 2px solid $borderColor;
     border-radius: 20px;
-    height: 80vh;
+
+    height: 100%;
+    min-height: 400px;
+    max-height: 650px;
 }
 
 .NoteSliderTableRow {
