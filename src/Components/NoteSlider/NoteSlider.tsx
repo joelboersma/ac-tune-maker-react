@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import ReactSlider from 'react-slider'
 import './NoteSlider.scss'
 
@@ -26,24 +26,21 @@ interface SliderProps {
   value?: SliderValue;
 }
 
-function sliderValueChanged(val: number | number[] | null | undefined) {
-  if (val as number >= 0) {
-    // const num = Number(val)
-    // console.log('onChange value:', SliderValue[num])
-  }
-  else {
-    console.error("Error: slider returned non-number value:", val, typeof val)
-  }
-}
-
 const NoteSlider: FC <SliderProps> = (props: SliderProps) => {
-  let value;
-  if (props.value === undefined) {
-    value = 0;
+  
+  const [value, setValue] = useState(props.value)
+  
+  function sliderValueChanged(val: number) {
+    if (val as number >= 0) {
+      const num = Number(val)
+      console.log('onChange value:', SliderValue[num])
+      setValue(val)
+    }
+    else {
+      console.error("Error: slider returned non-number value:", val, typeof val)
+    }
   }
-  else {
-    value = props.value;
-  }
+
   return (
     <ReactSlider
       className="NoteSlider"
@@ -62,4 +59,4 @@ const NoteSlider: FC <SliderProps> = (props: SliderProps) => {
   );
 }
 
-export default NoteSlider;
+export {NoteSlider, SliderValue};
