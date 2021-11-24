@@ -22,7 +22,7 @@ enum SliderValue {
 }
 
 interface SliderProps {
-  id: number;
+  key: number;
   value?: SliderValue;
 }
 

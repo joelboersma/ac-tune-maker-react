@@ -9,7 +9,7 @@ const NoteSliderTable: FC = () => {
   return (
     <div className="NoteSliderTable">
       {
-        sliderVals.map((val, index) => <NoteSlider id={index}/>)
+        sliderVals.map((val, index) => <NoteSlider key={index}/>)
       }
     </div>
   );
