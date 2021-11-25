@@ -63,3 +63,23 @@ main {
     background-color: royalblue;
   }
 }
+
+footer {
+  width: 100%;
+  padding: 20px;
+  background-color: wheat;
+}
+
+footer a {
+  padding: 10px;
+  border-radius: 10px;
+
+  // text-decoration: none;
+  color: black;
+
+  transition: linear 0.2s background-color;
+
+  &:hover {
+    background-color: rgba(#000000, $alpha: 0.1);
+  }
+}

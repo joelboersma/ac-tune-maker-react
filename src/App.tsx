@@ -16,6 +16,9 @@ function App() {
           <button id="Restart">Restart</button>
         </section>
       </main>
+      <footer>
+        <a href="https://joelboersma.github.io">Made by Joel Boersma</a>
+      </footer>
     </div>
   );
 }
