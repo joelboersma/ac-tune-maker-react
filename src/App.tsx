@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './App.scss';
 import NoteSliderTable from './Components/NoteSliderTable/NoteSliderTable'
 
-function App() {
+const App: FC = () => {
   return (
     <div className="App">
       <header>
