@@ -26,6 +26,12 @@ const App: FC = () => {
     console.table(noteStrings)
   }
 
+  const reset = async () => {
+    setNotes(notes.map((note) => {
+      return {id: note.id, value: 0}
+    }));
+  }
+
   return (
     <div className="App">
       <header>
@@ -36,7 +42,7 @@ const App: FC = () => {
         <section className="buttonRow">
           <button id="Help">Help</button>
           <button id="Play" onClick={playSong}>Play</button>
-          <button id="Restart">Restart</button>
+          <button id="Reset" onClick={reset}>Reset</button>
         </section>
       </main>
       <footer>
