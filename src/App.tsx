@@ -5,10 +5,16 @@ import NoteValue from './Types/NoteValue';
 import Note from './Types/Note';
 import './App.scss';
 
+// Howler.autoUnlock = true;
+
 const App: FC = () => {
   const noteSounds = Array(14).fill(0).map((_, i) => new Howl({
     src: [`../sound/${i}.mp3`],
-    rate: 2
+    preload: true,
+    html5: true,
+    onloaderror: (id: number, e: any) => {
+      console.error(`Howl load error: ${e}`);
+    }
   }));
 
   const [notes, setNotes] = useState(
@@ -16,9 +22,19 @@ const App: FC = () => {
   );
 
   const changeNote = async (noteToChange: Note) => {
+    playNote(noteToChange.value);
     setNotes(notes.map((note) => 
       note.id === noteToChange.id ? {id: note.id, value: noteToChange.value} : note
     ));
+  }
+
+  const playNote = (val: NoteValue) => {
+    if (val >= NoteValue.g && val <= NoteValue.E) {
+      // console.log(Howler.ctx.state);
+      const soundIndex = val - NoteValue.g;
+      console.log(noteSounds[soundIndex].state());
+      noteSounds[soundIndex].play();
+    }
   }
 
   const playSong = () => {
