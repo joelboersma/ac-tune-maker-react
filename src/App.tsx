@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import NoteSliderTable from './Components/NoteSliderTable/NoteSliderTable';
+import NoteValue from './Types/NoteValue';
 import Note from './Types/Note';
 import './App.scss';
 
@@ -20,6 +21,11 @@ const App: FC = () => {
     ));
   }
 
+  const playSong = () => {
+    const noteStrings = notes.map(note => NoteValue[note.value]);
+    console.table(noteStrings)
+  }
+
   return (
     <div className="App">
       <header>
@@ -29,7 +35,7 @@ const App: FC = () => {
         <NoteSliderTable notes={notes} sliderOnChange={changeNote}/>
         <section className="buttonRow">
           <button id="Help">Help</button>
-          <button id="Play">Play</button>
+          <button id="Play" onClick={playSong}>Play</button>
           <button id="Restart">Restart</button>
         </section>
       </main>
