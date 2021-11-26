@@ -1,10 +1,16 @@
 import { FC, useState } from 'react';
+import { Howl, Howler } from 'howler';
 import NoteSliderTable from './Components/NoteSliderTable/NoteSliderTable';
 import NoteValue from './Types/NoteValue';
 import Note from './Types/Note';
 import './App.scss';
 
 const App: FC = () => {
+  const noteSounds = Array(13).map((_, index) => new Howl({
+    src: [`${index}.mp3`],
+    rate: 2
+  }));
+
   const [notes, setNotes] = useState(() => {
     let notes: Note[] = []
   
