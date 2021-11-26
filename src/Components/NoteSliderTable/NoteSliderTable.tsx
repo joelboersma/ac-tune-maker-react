@@ -1,14 +1,25 @@
-import React, { FC } from 'react';
-import {NoteSlider, SliderValue} from '../NoteSlider/NoteSlider';
+import { FC } from 'react';
+import NoteSlider from '../NoteSlider/NoteSlider';
+import Note from '../../Types/Note'
 import './NoteSliderTable.scss'
 
-const NoteSliderTable: FC = () => {
-  let sliderVals: SliderValue[] = Array(16).fill(0);
-  
+interface NoteSliderTableProps {
+  notes: Note[]
+  sliderOnChange: Function
+}
+
+const NoteSliderTable: FC <NoteSliderTableProps> = (props: NoteSliderTableProps) => {
   return (
     <div className="NoteSliderTable">
       {
-        sliderVals.map((val, index) => <NoteSlider key={index} value={val}/>)
+        props.notes.map((note) => 
+          <NoteSlider 
+            key={note.id}
+            id={note.id}
+            value={note.value} 
+            onChange={props.sliderOnChange}
+          />
+        )
       }
     </div>
   );

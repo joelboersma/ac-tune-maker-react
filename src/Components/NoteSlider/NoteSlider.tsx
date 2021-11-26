@@ -1,62 +1,42 @@
-import React, { FC, useState } from 'react'
+import { FC } from 'react'
 import ReactSlider from 'react-slider'
+import NoteValue from '../../Types/NoteValue'
+import Note from '../../Types/Note'
 import './NoteSlider.scss'
 
-enum SliderValue {
-  Sleep,
-  Hold,
-  g,
-  a,
-  b,
-  c,
-  d,
-  e,
-  f,
-  G,
-  A,
-  B,
-  C,
-  D,
-  E,
-  Random
-}
-
-interface SliderProps {
+interface NoteSliderProps {
   key: number;
-  value?: SliderValue;
+  id: number;
+  value?: NoteValue;
+  onChange: Function;
 }
 
-const NoteSlider: FC <SliderProps> = (props: SliderProps) => {
-  
-  const [value, setValue] = useState(props.value)
-  
-  function sliderValueChanged(val: number) {
-    if (val as number >= 0) {
-      const num = Number(val)
-      console.log('onChange value:', SliderValue[num])
-      setValue(val)
+const NoteSlider: FC <NoteSliderProps> = (props: NoteSliderProps) => {
+  const sliderValueChanged = (val: NoteValue) => {
+    const newNote: Note = {
+      value: val,
+      id: props.id
     }
-    else {
-      console.error("Error: slider returned non-number value:", val, typeof val)
-    }
+    // console.log(`Slider ${props.id}: ${NoteValue[newNote.value]}`)
+    props.onChange(newNote)
   }
 
   return (
     <ReactSlider
       className="NoteSlider"
       marks
-      min={SliderValue.Sleep}
-      max={SliderValue.Random}
+      min={NoteValue.Sleep}
+      max={NoteValue.Random}
       markClassName="SimpleMark"
       thumbClassName="SimpleThumb"
       trackClassName="SimpleTrack"
       orientation="vertical"
       invert
       onChange={sliderValueChanged}
-      renderThumb={(props, state) => <div {...props}>{SliderValue[state.valueNow]}</div>}
-      value={value}
+      renderThumb={(props, state) => <div {...props}>{NoteValue[state.valueNow]}</div>}
+      value={props.value}
     />
   );
 }
 
-export {NoteSlider, SliderValue};
+export default NoteSlider;
