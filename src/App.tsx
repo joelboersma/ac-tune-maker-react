@@ -11,15 +11,9 @@ const App: FC = () => {
     rate: 2
   }));
 
-  const [notes, setNotes] = useState(() => {
-    let notes: Note[] = []
-  
-    for (let i = 0; i < 16; i++) {
-      notes.push({id: i, value: 0});
-    }
-  
-    return notes;
-  });
+  const [notes, setNotes] = useState(
+    Array(16).fill(0).map((_, i) => new Note(i, 0))
+  );
 
   const changeNote = async (noteToChange: Note) => {
     setNotes(notes.map((note) => 

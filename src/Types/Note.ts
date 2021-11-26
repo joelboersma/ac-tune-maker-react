@@ -1,8 +1,12 @@
 import NoteValue from './NoteValue'
 
-declare type Note = {
-   id: number,
-   value: NoteValue,
+class Note {
+   id: number;
+   value: NoteValue;
+   constructor(id: number, value: NoteValue) {
+      this.id = id;
+      this.value = value;
+   }
 }
 
 export default Note
