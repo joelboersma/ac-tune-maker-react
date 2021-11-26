@@ -6,8 +6,8 @@ import Note from './Types/Note';
 import './App.scss';
 
 const App: FC = () => {
-  const noteSounds = Array(13).map((_, index) => new Howl({
-    src: [`${index}.mp3`],
+  const noteSounds = Array(14).fill(0).map((_, i) => new Howl({
+    src: [`../sound/${i}.mp3`],
     rate: 2
   }));
 
