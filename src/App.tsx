@@ -1,15 +1,16 @@
 import { FC, useState } from 'react';
 import { Howl, Howler } from 'howler';
 import NoteSliderTable from './Components/NoteSliderTable/NoteSliderTable';
-import NoteValue from './Types/NoteValue';
-import Note from './Types/Note';
+import NoteValue from './Modules/NoteValue';
+import SoundFiles from './Modules/SoundFiles';
+import Note from './Modules/Note';
 import './App.scss';
 
 // Howler.autoUnlock = true;
 
 const App: FC = () => {
   const noteSounds = Array(14).fill(0).map((_, i) => new Howl({
-    src: [`../sound/${i}.mp3`],
+    src: SoundFiles[i],
     preload: true,
     html5: true,
     onloaderror: (id: number, e: any) => {
