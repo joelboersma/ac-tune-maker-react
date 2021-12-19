@@ -4,7 +4,6 @@ import SoundManager from './Components/SoundManager';
 import SoundFiles from './Modules/SoundFiles';
 import NoteValue from './Modules/NoteValue';
 import Note from './Modules/Note';
-import { Howler } from 'howler';
 import './App.scss';
 
 const App: FC = () => {
@@ -22,7 +21,6 @@ const App: FC = () => {
   }
 
   const playNote = (val: NoteValue) => {
-    Howler.stop();  // Stop all sounds
     const soundIndexToPlay = val - NoteValue.g;
     setSoundsPlaying(soundsPlaying.map((_, i) => 
       i === soundIndexToPlay
