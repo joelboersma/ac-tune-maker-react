@@ -6,7 +6,7 @@ interface SoundManagerProps {
   soundsPlaying: boolean[]
 }
 
-const SoundManager: FC<SoundManagerProps> = (props: SoundManagerProps) => {
+const SoundManager: FC <SoundManagerProps> = (props: SoundManagerProps) => {
   return (
     <div>
       {
