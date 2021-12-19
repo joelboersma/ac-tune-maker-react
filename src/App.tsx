@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
-import NoteSliderTable from './Components/NoteSliderTable/NoteSliderTable';
-import SoundManager from './Components/SoundManager/SoundManager';
+import NoteSliderTable from './Components/NoteSliderTable';
+import SoundManager from './Components/SoundManager';
 import SoundFiles from './Modules/SoundFiles';
 import NoteValue from './Modules/NoteValue';
 import Note from './Modules/Note';

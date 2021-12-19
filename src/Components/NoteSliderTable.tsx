@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import NoteSlider from '../NoteSlider/NoteSlider';
-import Note from '../../Modules/Note'
-import './NoteSliderTable.scss'
+import NoteSlider from './NoteSlider';
+import Note from '../Modules/Note';
+import './styles/NoteSliderTable.scss'
 
 interface NoteSliderTableProps {
   notes: Note[]

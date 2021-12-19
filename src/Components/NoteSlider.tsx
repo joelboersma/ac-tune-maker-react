@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import ReactSlider from 'react-slider'
-import NoteValue from '../../Modules/NoteValue'
-import Note from '../../Modules/Note'
-import './NoteSlider.scss'
+import NoteValue from '../Modules/NoteValue'
+import Note from '../Modules/Note'
+import './styles/NoteSlider.scss'
 
 interface NoteSliderProps {
   key: number;

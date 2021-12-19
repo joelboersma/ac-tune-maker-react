@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import ReactHowler from 'react-howler'
-import SoundFiles from '../../Modules/SoundFiles'
+import SoundFiles from '../Modules/SoundFiles'
 
 interface SoundManagerProps {
   soundsPlaying: boolean[]
