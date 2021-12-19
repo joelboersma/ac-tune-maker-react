@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import NoteSliderTable from './Components/NoteSliderTable';
 import SoundManager from './Components/SoundManager';
 import SoundFiles from './Modules/SoundFiles';
@@ -7,11 +7,29 @@ import Note from './Modules/Note';
 import './App.scss';
 
 const App: FC = () => {
-  const [soundsPlaying, setSoundsPlaying] = useState<boolean[]>(Array(SoundFiles.length).fill(false));
-
   const [notes, setNotes] = useState(
     Array(16).fill(0).map((_, i) => new Note(i, 0))
   );
+  const [soundsPlaying, setSoundsPlaying] = useState(
+    Array<boolean>(SoundFiles.length).fill(false)
+  );
+  const soundsPlayingRef = useRef(soundsPlaying)
+
+  const setSoundPlaying = (index: number, value?: boolean) => {
+    // Howler.stop();
+    if (value === undefined) {
+      // Set soundsPlaying[i] to true and all others to false
+      setSoundsPlaying(soundsPlaying.map((_, i) => 
+        i === index
+      ));
+    }
+    else {
+      // Set soundsPlaying[i] to @value and leave the others alone
+      setSoundsPlaying(soundsPlayingRef.current.map((val, i) => 
+        i === index ? value : val
+      ));
+    }
+  }
 
   const changeNote = async (noteToChange: Note) => {
     playNote(noteToChange.value);
@@ -20,11 +38,17 @@ const App: FC = () => {
     ));
   }
 
-  const playNote = (val: NoteValue) => {
+  const playNote = (val: NoteValue, duration: number = 600) => {
     const soundIndexToPlay = val - NoteValue.g;
-    setSoundsPlaying(soundsPlaying.map((_, i) => 
-      i === soundIndexToPlay
-    ));
+    setSoundPlaying(soundIndexToPlay, true)
+    setTimeout(() => {
+      const soundPlaying = soundsPlayingRef.current[soundIndexToPlay]
+      console.log(soundPlaying)
+      if (soundPlaying) {
+        console.log("hi")
+        setSoundPlaying(soundIndexToPlay, false)
+      }
+    }, duration)
   }
 
   const playSong = () => {
