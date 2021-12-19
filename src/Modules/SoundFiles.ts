@@ -13,7 +13,7 @@ import sound11 from '../sound/11.mp3'
 import sound12 from '../sound/12.mp3'
 import sound13 from '../sound/13.mp3'
 
-export default [
+const SoundFiles = [
    sound0,
    sound1,
    sound2,
@@ -29,3 +29,5 @@ export default [
    sound12,
    sound13
 ]
+
+export default SoundFiles
