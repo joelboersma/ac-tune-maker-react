@@ -1,22 +1,13 @@
 import { FC, useState } from 'react';
-import { Howl, Howler } from 'howler';
 import NoteSliderTable from './Components/NoteSliderTable/NoteSliderTable';
-import NoteValue from './Modules/NoteValue';
+import SoundManager from './Components/SoundManager/SoundManager';
 import SoundFiles from './Modules/SoundFiles';
+import NoteValue from './Modules/NoteValue';
 import Note from './Modules/Note';
 import './App.scss';
 
-// Howler.autoUnlock = true;
-
 const App: FC = () => {
-  const noteSounds = Array(14).fill(0).map((_, i) => new Howl({
-    src: SoundFiles[i],
-    preload: true,
-    html5: true,
-    onloaderror: (id: number, e: any) => {
-      console.error(`Howl load error: ${e}`);
-    }
-  }));
+  const [soundsPlaying, setSoundsPlaying] = useState<boolean[]>(Array(SoundFiles.length).fill(false));
 
   const [notes, setNotes] = useState(
     Array(16).fill(0).map((_, i) => new Note(i, 0))
@@ -30,12 +21,10 @@ const App: FC = () => {
   }
 
   const playNote = (val: NoteValue) => {
-    if (val >= NoteValue.g && val <= NoteValue.E) {
-      // console.log(Howler.ctx.state);
-      const soundIndex = val - NoteValue.g;
-      console.log(noteSounds[soundIndex].state());
-      noteSounds[soundIndex].play();
-    }
+    const soundIndexToPlay = val - NoteValue.g;
+    setSoundsPlaying(soundsPlaying.map((_, i) => 
+      i === soundIndexToPlay
+    ));
   }
 
   const playSong = () => {
@@ -65,6 +54,7 @@ const App: FC = () => {
       <footer>
         <a href="https://joelboersma.github.io">Made by Joel Boersma</a>
       </footer>
+      <SoundManager soundsPlaying={soundsPlaying}/>
     </div>
   );
 }
