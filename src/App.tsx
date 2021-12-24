@@ -63,6 +63,11 @@ const App: FC = () => {
     console.table(noteStrings)
   }
 
+  const printNotes = () => {
+    const noteStrings = notes.map(note => NoteValue[note.value]);
+    console.table(noteStrings);
+  }
+
   const reset = async () => {
     setNotes(notes.map((note) => {
       return {id: note.id, value: 0}
