@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import NoteSliderTable from './Components/NoteSliderTable';
 import SoundManager from './Components/SoundManager';
 import SoundFiles from './Modules/SoundFiles';
@@ -14,6 +14,19 @@ const App: FC = () => {
     Array<boolean>(SoundFiles.length).fill(false)
   );
   const soundsPlayingRef = useRef(soundsPlaying)
+
+  const [currentNoteDuration, setCurrentNoteDuration] = useState(0)
+  const [currentNotePlaying, setCurrentNotePlaying] = useState(0)
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setSoundPlaying(currentNotePlaying, false)
+    }, currentNoteDuration)
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [currentNotePlaying, currentNoteDuration])
 
   const setSoundPlaying = (index: number, value?: boolean) => {
     // Howler.stop();
@@ -41,14 +54,8 @@ const App: FC = () => {
   const playNote = (val: NoteValue, duration: number = 600) => {
     const soundIndexToPlay = val - NoteValue.g;
     setSoundPlaying(soundIndexToPlay, true)
-    setTimeout(() => {
-      const soundPlaying = soundsPlayingRef.current[soundIndexToPlay]
-      console.log(soundPlaying)
-      if (soundPlaying) {
-        console.log("hi")
-        setSoundPlaying(soundIndexToPlay, false)
-      }
-    }, duration)
+    setCurrentNotePlaying(soundIndexToPlay)
+    setCurrentNoteDuration(duration)
   }
 
   const playSong = () => {
