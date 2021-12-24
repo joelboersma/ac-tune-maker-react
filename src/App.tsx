@@ -18,16 +18,6 @@ const App: FC = () => {
   const [currentNoteDuration, setCurrentNoteDuration] = useState(0)
   const [currentNotePlaying, setCurrentNotePlaying] = useState(0)
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setSoundPlaying(currentNotePlaying, false)
-    }, currentNoteDuration)
-
-    return () => {
-      clearTimeout(timeoutId);
-    }
-  }, [currentNotePlaying, currentNoteDuration])
-
   const setSoundPlaying = (index: number, value?: boolean) => {
     // Howler.stop();
     if (value === undefined) {
@@ -43,6 +33,16 @@ const App: FC = () => {
       ));
     }
   }
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setSoundPlaying(currentNotePlaying, false)
+    }, currentNoteDuration)
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
+  }, [currentNotePlaying, currentNoteDuration, setSoundPlaying])
 
   const changeNote = async (noteToChange: Note) => {
     playNote(noteToChange.value);
