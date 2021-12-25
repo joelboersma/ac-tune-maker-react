@@ -1,8 +1,10 @@
 import { FC, useEffect, useRef, useState } from 'react';
+import { Howler } from 'howler';
 import NoteSliderTable from './Components/NoteSliderTable';
 import SoundManager from './Components/SoundManager';
 import SoundFiles from './Modules/SoundFiles';
 import NoteValue from './Modules/NoteValue';
+import NotePlay from './Modules/NotePlay';
 import Note from './Modules/Note';
 import './App.scss';
 
@@ -52,6 +54,7 @@ const App: FC = () => {
   }
 
   const playNote = (val: NoteValue, duration: number = 600) => {
+    Howler.stop();
     const soundIndexToPlay = val - NoteValue.g;
     setSoundPlaying(soundIndexToPlay, true)
     setCurrentNotePlaying(soundIndexToPlay)
@@ -59,8 +62,42 @@ const App: FC = () => {
   }
 
   const playSong = () => {
-    const noteStrings = notes.map(note => NoteValue[note.value]);
-    console.table(noteStrings)
+    const ONE_NOTE_LENGTH = 260;
+
+    // Determine which notes to play, when, and how long
+    let notePlays: Array<NotePlay> = [];
+    let curStart = 0;
+    let previousValue: NoteValue = NoteValue.Sleep;
+    for (const note of notes) {
+      switch(note.value) {
+        case NoteValue.Hold:
+          if (notePlays.length > 0) {
+            notePlays[notePlays.length - 1].lenInMs += ONE_NOTE_LENGTH;
+          }
+          else {
+            notePlays.push(new NotePlay(NoteValue.Sleep, curStart, ONE_NOTE_LENGTH));
+            previousValue = NoteValue.Sleep;
+          }
+          break;
+        case NoteValue.Random:
+          const valToUse = Math.round(Math.random() * 13 + 2);
+          notePlays.push(new NotePlay(valToUse, curStart, ONE_NOTE_LENGTH));
+          previousValue = valToUse;
+          break;
+        default:
+          notePlays.push(new NotePlay(note.value, curStart, ONE_NOTE_LENGTH));
+          previousValue = note.value;
+      }
+      curStart += ONE_NOTE_LENGTH;
+    }
+
+    // Schedule the Note Plays
+    for (const np of notePlays) {
+      setTimeout(() => {
+        console.log(np);
+        playNote(np.value, np.lenInMs);
+      }, np.startTime);
+    }
   }
 
   const printNotes = () => {
