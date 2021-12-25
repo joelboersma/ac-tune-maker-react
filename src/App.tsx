@@ -94,7 +94,7 @@ const App: FC = () => {
     // Schedule the Note Plays
     for (const np of notePlays) {
       setTimeout(() => {
-        console.log(np);
+        // console.log(np);
         playNote(np.value, np.lenInMs);
       }, np.startTime);
     }
