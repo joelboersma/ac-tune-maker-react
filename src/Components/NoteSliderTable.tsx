@@ -6,6 +6,7 @@ import './styles/NoteSliderTable.scss'
 interface NoteSliderTableProps {
   notes: Note[]
   sliderOnChange: Function
+  disabled: boolean
 }
 
 const NoteSliderTable: FC <NoteSliderTableProps> = (props: NoteSliderTableProps) => {
@@ -18,6 +19,7 @@ const NoteSliderTable: FC <NoteSliderTableProps> = (props: NoteSliderTableProps)
             id={note.id}
             value={note.value} 
             onChange={props.sliderOnChange}
+            disabled={props.disabled}
           />
         )
       }

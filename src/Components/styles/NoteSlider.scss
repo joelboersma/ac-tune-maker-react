@@ -8,10 +8,16 @@ $thumbRadius: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     :focus {
         outline: none;
         background-color: rgb(64, 128, 255);
+    }
+
+    &.disabled .SimpleThumb {
+        background-color: rgb(160, 192, 255);
+        cursor: not-allowed;
     }
 }
 

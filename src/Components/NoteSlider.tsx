@@ -9,6 +9,7 @@ interface NoteSliderProps {
   id: number;
   value?: NoteValue;
   onChange: Function;
+  disabled: boolean;
 }
 
 const NoteSlider: FC <NoteSliderProps> = (props: NoteSliderProps) => {
@@ -35,6 +36,7 @@ const NoteSlider: FC <NoteSliderProps> = (props: NoteSliderProps) => {
       onChange={sliderValueChanged}
       renderThumb={(props, state) => <div {...props}>{NoteValue[state.valueNow]}</div>}
       value={props.value}
+      disabled={props.disabled}
     />
   );
 }

@@ -20,6 +20,8 @@ const App: FC = () => {
   const [currentNoteDuration, setCurrentNoteDuration] = useState(0)
   const [currentNotePlaying, setCurrentNotePlaying] = useState(0)
 
+  const [songPlaying, setSongPaying] = useState(false);
+
   const setSoundPlaying = (index: number, value?: boolean) => {
     // Howler.stop();
     if (value === undefined) {
@@ -67,7 +69,6 @@ const App: FC = () => {
     // Determine which notes to play, when, and how long
     let notePlays: Array<NotePlay> = [];
     let curStart = 0;
-    let previousValue: NoteValue = NoteValue.Sleep;
     for (const note of notes) {
       switch(note.value) {
         case NoteValue.Hold:
@@ -76,28 +77,31 @@ const App: FC = () => {
           }
           else {
             notePlays.push(new NotePlay(NoteValue.Sleep, curStart, ONE_NOTE_LENGTH));
-            previousValue = NoteValue.Sleep;
           }
           break;
         case NoteValue.Random:
           const valToUse = Math.round(Math.random() * 13 + 2);
           notePlays.push(new NotePlay(valToUse, curStart, ONE_NOTE_LENGTH));
-          previousValue = valToUse;
           break;
         default:
           notePlays.push(new NotePlay(note.value, curStart, ONE_NOTE_LENGTH));
-          previousValue = note.value;
       }
       curStart += ONE_NOTE_LENGTH;
     }
 
+    // Song is playing (make sliders & buttons non-interactable)
+    setSongPaying(true);
+
     // Schedule the Note Plays
     for (const np of notePlays) {
       setTimeout(() => {
-        // console.log(np);
+        console.log(np);
         playNote(np.value, np.lenInMs);
       }, np.startTime);
     }
+
+    // Schedule song completion (make sliders & buttons interactable)
+    setTimeout(() => setSongPaying(false), ONE_NOTE_LENGTH * 16);
   }
 
   const printNotes = () => {
@@ -117,11 +121,11 @@ const App: FC = () => {
         <h1>Animal Crossing Town Tune Maker React</h1>
       </header>
       <main>
-        <NoteSliderTable notes={notes} sliderOnChange={changeNote}/>
+        <NoteSliderTable notes={notes} disabled={songPlaying} sliderOnChange={changeNote}/>
         <section className="buttonRow">
-          <button id="Help">Help</button>
-          <button id="Play" onClick={playSong}>Play</button>
-          <button id="Reset" onClick={reset}>Reset</button>
+          <button id="Help" disabled={songPlaying}>Help</button>
+          <button id="Play" onClick={playSong} disabled={songPlaying}>Play</button>
+          <button id="Reset" onClick={reset} disabled={songPlaying}>Reset</button>
         </section>
       </main>
       <footer>
