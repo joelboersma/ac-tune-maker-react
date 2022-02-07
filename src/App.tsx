@@ -2,6 +2,7 @@ import { FC, useEffect, useRef, useState } from 'react';
 import { Howler } from 'howler';
 import NoteSliderTable from './Components/NoteSliderTable';
 import SoundManager from './Components/SoundManager';
+import SharePopup from './Components/SharePopup';
 import SoundFiles from './Modules/SoundFiles';
 import NoteValue from './Modules/NoteValue';
 import NotePlay from './Modules/NotePlay';
@@ -161,6 +162,7 @@ const App: FC = () => {
       <footer>
         <a href="https://joelboersma.github.io">Made by Joel Boersma</a>
       </footer>
+      <SharePopup notes={notes} enabled={true}/>
       <SoundManager soundsPlaying={soundsPlaying}/>
     </div>
   );
