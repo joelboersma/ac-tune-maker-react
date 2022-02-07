@@ -141,6 +141,10 @@ const App: FC = () => {
     }));
   }
 
+  const openSharePopup = async () => {
+    console.log("Share!");
+  }
+
   return (
     <div className="App">
       <header>
@@ -149,7 +153,7 @@ const App: FC = () => {
       <main>
         <NoteSliderTable notes={notes} disabled={songPlaying} sliderOnChange={changeNote}/>
         <section className="buttonRow">
-          <button id="Help" disabled={songPlaying}>Help</button>
+          <button id="Share" onClick={openSharePopup} disabled={songPlaying}>Share</button>
           <button id="Play" onClick={playSong} disabled={songPlaying}>Play</button>
           <button id="Reset" onClick={reset} disabled={songPlaying}>Reset</button>
         </section>
