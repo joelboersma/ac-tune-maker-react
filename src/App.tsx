@@ -9,9 +9,27 @@ import Note from './Modules/Note';
 import './App.scss';
 
 const App: FC = () => {
-  const [notes, setNotes] = useState(
-    Array(16).fill(0).map((_, i) => new Note(i, 0))
-  );
+  const NUM_NOTES = 16;
+  const NUM_NOTE_VALUES = 16;
+  
+  const [notes, setNotes] = useState((() => {
+    const path = window.location.pathname.slice(1)
+    if (path.length === NUM_NOTES) {
+      let urlNotes: Note[] = [];
+      for (let i = 0; i < NUM_NOTES; i++) {
+        const myNum = parseInt(path[i], NUM_NOTE_VALUES);
+        if (isNaN(myNum)) {
+          return Array(NUM_NOTES).fill(0).map((_, j) => new Note(j, 0));
+        }
+        else {
+          urlNotes.push(new Note(i, myNum));
+        }
+      }
+      return urlNotes;
+    }
+    return Array(NUM_NOTES).fill(0).map((_, j) => new Note(j, 0));
+  })());
+
   const [soundsPlaying, setSoundsPlaying] = useState(
     Array<boolean>(SoundFiles.length).fill(false)
   );
@@ -101,7 +119,7 @@ const App: FC = () => {
     }
 
     // Schedule song completion (make sliders & buttons interactable)
-    setTimeout(() => setSongPaying(false), ONE_NOTE_LENGTH * 16);
+    setTimeout(() => setSongPaying(false), ONE_NOTE_LENGTH * NUM_NOTES);
   }
 
   const printNotes = () => {
