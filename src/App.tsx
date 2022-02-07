@@ -12,23 +12,31 @@ const App: FC = () => {
   const NUM_NOTES = 16;
   const NUM_NOTE_VALUES = 16;
   
-  const [notes, setNotes] = useState((() => {
-    const path = window.location.pathname.slice(1)
+  const [notes, setNotes] = useState(
+    Array(NUM_NOTES).fill(0).map((_, j) => new Note(j, 0))
+  );
+
+  useEffect(() => {
+    // Grab URL path (without leading '/')
+    const path = window.location.pathname.slice(1);
+
+    // If path is 16 characters, construct new notes
     if (path.length === NUM_NOTES) {
       let urlNotes: Note[] = [];
       for (let i = 0; i < NUM_NOTES; i++) {
-        const myNum = parseInt(path[i], NUM_NOTE_VALUES);
-        if (isNaN(myNum)) {
-          return Array(NUM_NOTES).fill(0).map((_, j) => new Note(j, 0));
+        const hexDigit = parseInt(path[i], NUM_NOTE_VALUES);
+        if (isNaN(hexDigit)) {
+          // Bad hex digit, abort new array construction
+          return
         }
         else {
-          urlNotes.push(new Note(i, myNum));
+          urlNotes.push(new Note(i, hexDigit));
         }
       }
-      return urlNotes;
+      // @path is 16-character hex string - set notes
+      setNotes(urlNotes);
     }
-    return Array(NUM_NOTES).fill(0).map((_, j) => new Note(j, 0));
-  })());
+  }, []);
 
   const [soundsPlaying, setSoundsPlaying] = useState(
     Array<boolean>(SoundFiles.length).fill(false)
