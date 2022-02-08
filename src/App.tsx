@@ -18,8 +18,8 @@ const App: FC = () => {
   );
 
   useEffect(() => {
-    // Grab URL path (without leading '/')
-    const path = window.location.pathname.slice(1);
+    // Grab URL path (without '/')
+    const path = window.location.pathname.replaceAll('/', '');
 
     // If path is 16 characters, construct new notes
     if (path.length === NUM_NOTES) {
