@@ -133,10 +133,10 @@ const App: FC = () => {
     setTimeout(() => setSongPaying(false), ONE_NOTE_LENGTH * NUM_NOTES);
   }
 
-  const printNotes = () => {
-    const noteStrings = notes.map(note => NoteValue[note.value]);
-    console.table(noteStrings);
-  }
+  // const printNotes = () => {
+  //   const noteStrings = notes.map(note => NoteValue[note.value]);
+  //   console.table(noteStrings);
+  // }
 
   const reset = async () => {
     setNotes(notes.map((note) => {
