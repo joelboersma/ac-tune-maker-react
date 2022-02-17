@@ -65,6 +65,8 @@ const App: FC = () => {
     }
   }
 
+  const [sharePopupEnabled, setsharePopupEnabled] = useState(false)
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setSoundPlaying(currentNotePlaying, false)
@@ -142,8 +144,12 @@ const App: FC = () => {
     }));
   }
 
-  const openSharePopup = async () => {
-    console.log("Share!");
+  const openSharePopup = () => {
+    setsharePopupEnabled(true);
+  }
+
+  const closeSharePopup = () => {
+    setsharePopupEnabled(false);
   }
 
   return (
@@ -162,7 +168,7 @@ const App: FC = () => {
       <footer>
         <a href="https://joelboersma.github.io">Made by Joel Boersma</a>
       </footer>
-      <SharePopup notes={notes} enabled={true}/>
+      <SharePopup notes={notes} enabled={sharePopupEnabled} closeHandler={closeSharePopup}/>
       <SoundManager soundsPlaying={soundsPlaying}/>
     </div>
   );

@@ -5,6 +5,7 @@ import './styles/SharePopup.scss'
 interface SharePopupProps {
    notes: Note[];
    enabled: boolean;
+   closeHandler: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const SharePopup = (props: SharePopupProps) => {
@@ -25,6 +26,7 @@ const SharePopup = (props: SharePopupProps) => {
             <p>Use the link to share your tune!</p>
             <input readOnly={true} value={SHARE_URL}></input>
             <button id="CopyButton" onClick={copyUrl}>Copy</button>
+            <button id="CloseButton" onClick={props.closeHandler}>X</button>
          </div>
       </div>
    )

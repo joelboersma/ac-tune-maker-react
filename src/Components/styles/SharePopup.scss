@@ -13,6 +13,7 @@
       border-radius: 50px;
       background-color: #fff;
       padding: 50px;
+      position: relative;
 
       display: flex;
       flex-direction: column;
@@ -22,39 +23,60 @@
       * {
          margin: 10px 0;
       }
-   }
 
-   h2 {
-      font-size: xx-large;
-   }
-
-   p {
-      font-size: large;
-   }
-
-   input {
-      font-size: 20px;
-      width: 400px;
-      text-align: center;
-   }
-
-   #CopyButton {
-      font-size: 24px;
-      border: none;
-      border-radius: 10px;
-      padding: 10px 20px;
-      font-weight: bold;
-      color: white;
-      cursor: pointer;
-
-      background-color: cornflowerblue;
-
-      &:active {
-         background-color: royalblue;
+      h2 {
+         font-size: xx-large;
+      }
+   
+      p {
+         font-size: large;
+      }
+   
+      input {
+         font-size: 20px;
+         width: 400px;
+         text-align: center;
       }
 
-      &:disabled {
-         background-color: rgb(193, 208, 235);
+      button {
+         font-size: 24px;
+         border: none;
+         font-weight: bold;
+         cursor: pointer;
+      }
+   
+      #CopyButton {
+         color: white;
+         background-color: cornflowerblue;
+         border-radius: 10px;
+         padding: 10px 20px;
+   
+         &:active {
+            background-color: royalblue;
+         }
+   
+         &:disabled {
+            background-color: rgb(193, 208, 235);
+         }
+      }
+   
+      #CloseButton {
+         position: absolute;
+         top: 20px;
+         right: 20px;
+         border-radius: 50%;
+         margin: 10px 10px;
+
+         $radius: 35px;
+         width: $radius;
+         height: $radius;
+
+         background-color: #eee;
+         color: #777;
+
+         &:active {
+            background-color: #aaa;
+         }
       }
    }
 }
