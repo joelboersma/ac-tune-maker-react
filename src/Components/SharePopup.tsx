@@ -1,4 +1,3 @@
-import NoteValue from '../Modules/NoteValue';
 import Note from '../Modules/Note';
 import './styles/SharePopup.scss'
 
