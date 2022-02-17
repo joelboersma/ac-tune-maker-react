@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState, useCallback } from 'react';
 import { Howler } from 'howler';
 import NoteSliderTable from './Components/NoteSliderTable';
 import SoundManager from './Components/SoundManager';
@@ -49,7 +49,7 @@ const App: FC = () => {
 
   const [songPlaying, setSongPaying] = useState(false);
 
-  const setSoundPlaying = (index: number, value?: boolean) => {
+  const setSoundPlaying = useCallback((index: number, value?: boolean) => {
     // Howler.stop();
     if (value === undefined) {
       // Set soundsPlaying[i] to true and all others to false
@@ -63,7 +63,7 @@ const App: FC = () => {
         i === index ? value : val
       ));
     }
-  }
+  }, [soundsPlaying, setSoundsPlaying, soundsPlayingRef]);
 
   const [sharePopupEnabled, setsharePopupEnabled] = useState(false)
 
