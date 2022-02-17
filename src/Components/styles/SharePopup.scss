@@ -9,19 +9,56 @@
    justify-content: center;
    align-items: center;
 
+   .card {
+      border-radius: 50px;
+      background-color: #fff;
+      padding: 50px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      * {
+         margin: 10px 0;
+      }
+   }
+
+   h2 {
+      font-size: xx-large;
+   }
+
+   p {
+      font-size: large;
+   }
+
    input {
-      font-size: 16px;
-      width: 350px;
+      font-size: 20px;
+      width: 400px;
       text-align: center;
+   }
+
+   #CopyButton {
+      font-size: 24px;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+
+      background-color: cornflowerblue;
+
+      &:active {
+         background-color: royalblue;
+      }
+
+      &:disabled {
+         background-color: rgb(193, 208, 235);
+      }
    }
 }
 
 #PopupBackground.disabled {
    display: none;
-}
-
-.card {
-   border-radius: 50px;
-   background-color: #fff;
-   padding: 50px;
 }
