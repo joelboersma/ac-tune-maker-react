@@ -155,7 +155,7 @@ const App: FC = () => {
   return (
     <div className="App">
       <header>
-        <h1>Animal Crossing Town Tune Maker React</h1>
+        <h1>React Tune Maker</h1>
       </header>
       <main>
         <NoteSliderTable notes={notes} disabled={songPlaying} sliderOnChange={changeNote}/>
