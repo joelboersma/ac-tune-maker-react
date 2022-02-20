@@ -123,10 +123,18 @@ const App: FC = () => {
 
     // Schedule the Note Plays
     for (const np of notePlays) {
-      setTimeout(() => {
-        console.log(np);
+      if (np.startTime === 0) {
+        // Play immediately
+        console.log(np, Howler.ctx.state);
         playNote(np.value, np.lenInMs);
-      }, np.startTime);
+      }
+      else {
+        // Play after np.startTime ms
+        setTimeout(() => {
+          console.log(np, Howler.ctx.state);
+          playNote(np.value, np.lenInMs);
+        }, np.startTime);
+      }
     }
 
     // Schedule song completion (make sliders & buttons interactable)
