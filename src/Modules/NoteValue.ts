@@ -14,7 +14,8 @@ enum NoteValue {
    C,
    D,
    E,
-   Random
+   Random,
+   Silent
 }
 
 export default NoteValue
