@@ -1,86 +1,20 @@
-#PopupBackground {
-   position: absolute;
-   width: 100%;
-   height: 100%;
-   background-color: #00000088;
-   z-index: 2;
-
-   display: flex;
-   justify-content: center;
-   align-items: center;
-
-   .card {
-      border-radius: 50px;
-      background-color: #fff;
-      padding: 50px;
-      position: relative;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      * {
-         margin: 10px 0;
-      }
-
-      h2 {
-         font-size: xx-large;
-      }
-   
-      p {
-         font-size: large;
-      }
-   
-      input {
-         font-size: 20px;
-         width: 400px;
-         text-align: center;
-      }
-
-      button {
-         font-size: 24px;
-         border: none;
-         font-weight: bold;
-         cursor: pointer;
-      }
-   
-      #CopyButton {
-         color: white;
-         background-color: cornflowerblue;
-         border-radius: 10px;
-         padding: 10px 20px;
-   
-         &:active {
-            background-color: royalblue;
-         }
-   
-         &:disabled {
-            background-color: rgb(193, 208, 235);
-         }
-      }
-   
-      #CloseButton {
-         position: absolute;
-         top: 20px;
-         right: 20px;
-         border-radius: 50%;
-         margin: 10px 10px;
-
-         $radius: 35px;
-         width: $radius;
-         height: $radius;
-
-         background-color: #eee;
-         color: #777;
-
-         &:active {
-            background-color: #aaa;
-         }
-      }
-   }
+input {
+   font-size: 20px;
+   width: 400px;
+   text-align: center;
 }
+   
+#CopyButton {
+   color: white;
+   background-color: cornflowerblue;
+   border-radius: 10px;
+   padding: 10px 20px;
 
-#PopupBackground.disabled {
-   display: none;
+   &:active {
+      background-color: royalblue;
+   }
+
+   &:disabled {
+      background-color: rgb(193, 208, 235);
+   }
 }

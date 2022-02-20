@@ -1,4 +1,5 @@
 import Note from '../Modules/Note';
+import Popup from './Popup';
 import './styles/SharePopup.scss'
 
 interface SharePopupProps {
@@ -19,15 +20,12 @@ const SharePopup = (props: SharePopupProps) => {
    }
 
    return (
-      <div id="PopupBackground" className={props.enabled ? '' : 'disabled'}>
-         <div className="card">
-            <h2>Share</h2>
-            <p>Use the link to share your tune!</p>
-            <input readOnly={true} value={SHARE_URL}></input>
-            <button id="CopyButton" onClick={copyUrl}>Copy</button>
-            <button id="CloseButton" onClick={props.closeHandler}>X</button>
-         </div>
-      </div>
+      <Popup enabled={props.enabled} closeHandler={props.closeHandler}>
+         <h2>Share</h2>
+         <p>Use the link to share your tune!</p>
+         <input readOnly={true} value={SHARE_URL}></input>
+         <button id="CopyButton" onClick={copyUrl}>Copy</button>
+      </Popup>
    )
 };
 
