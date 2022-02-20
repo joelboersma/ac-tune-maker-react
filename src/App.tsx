@@ -109,7 +109,7 @@ const App: FC = () => {
           }
           break;
         case NoteValue.Random:
-          const valToUse = Math.round(Math.random() * 13 + 2);
+          const valToUse = Math.floor(Math.random() * 13 + 2);
           notePlays.push(new NotePlay(valToUse, curStart, ONE_NOTE_LENGTH));
           break;
         default:
