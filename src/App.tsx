@@ -2,6 +2,7 @@ import { FC, useEffect, useRef, useState, useCallback } from 'react';
 import { Howler } from 'howler';
 import NoteSliderTable from './Components/NoteSliderTable';
 import SoundManager from './Components/SoundManager';
+import WelcomePopup from './Components/WelcomePopup';
 import SharePopup from './Components/SharePopup';
 import SoundFiles from './Modules/SoundFiles';
 import NoteValue from './Modules/NoteValue';
@@ -65,7 +66,8 @@ const App: FC = () => {
     }
   }, [soundsPlaying, setSoundsPlaying, soundsPlayingRef]);
 
-  const [sharePopupEnabled, setsharePopupEnabled] = useState(false)
+  const [sharePopupEnabled, setSharePopupEnabled] = useState(false);
+  const [welcomePopupEnabled, setWelcomePopupEnabled] = useState(true);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -153,11 +155,18 @@ const App: FC = () => {
   }
 
   const openSharePopup = () => {
-    setsharePopupEnabled(true);
+    setSharePopupEnabled(true);
   }
 
   const closeSharePopup = () => {
-    setsharePopupEnabled(false);
+    setSharePopupEnabled(false);
+  }
+
+  const closeWelcomePopup = () => {
+    // Tricks the AudioContext so that the first note of the song will play consistently
+    playNote(NoteValue.Random);
+
+    setWelcomePopupEnabled(false);
   }
 
   return (
@@ -176,6 +185,7 @@ const App: FC = () => {
       <footer>
         <a href="https://joelboersma.github.io">Made by Joel Boersma</a>
       </footer>
+      <WelcomePopup enabled={welcomePopupEnabled} closeHandler={closeWelcomePopup} notes={notes}/>
       <SharePopup notes={notes} enabled={sharePopupEnabled} closeHandler={closeSharePopup}/>
       <SoundManager soundsPlaying={soundsPlaying}/>
     </div>

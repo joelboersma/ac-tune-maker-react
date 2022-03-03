@@ -1,0 +1,18 @@
+p {
+   max-width: 500px;
+}
+
+#StartButton {
+   color: white;
+   background-color: forestgreen;
+   border-radius: 10px;
+   padding: 10px 20px;
+
+   &:active {
+      background-color: green;
+   }
+
+   &:disabled {
+      background-color: rgb(167, 202, 167);
+   }
+}
