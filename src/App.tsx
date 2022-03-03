@@ -127,13 +127,11 @@ const App: FC = () => {
     for (const np of notePlays) {
       if (np.startTime === 0) {
         // Play immediately
-        console.log(np, Howler.ctx.state);
         playNote(np.value, np.lenInMs);
       }
       else {
         // Play after np.startTime ms
         setTimeout(() => {
-          console.log(np, Howler.ctx.state);
           playNote(np.value, np.lenInMs);
         }, np.startTime);
       }
