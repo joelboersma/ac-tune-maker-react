@@ -18,7 +18,6 @@ const NoteSlider: FC <NoteSliderProps> = (props: NoteSliderProps) => {
       value: val,
       id: props.id
     }
-    // console.log(`Slider ${props.id}: ${NoteValue[newNote.value]}`)
     props.onChange(newNote)
   }
 
