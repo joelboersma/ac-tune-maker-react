@@ -18,17 +18,19 @@ const App: FC = () => {
     Array(NUM_NOTES).fill(0).map((_, j) => new Note(j, 0))
   );
 
+  // If our page path (minus the leading & trailing '/') is a 16-digit hex number,
+  // use it to construct the tune shared through a link. Otherwise, use all Sleeps.
   useEffect(() => {
     // Grab URL path (without '/')
     const path = window.location.pathname.replaceAll('/', '');
-
     // If path is 16 characters, construct new notes
     if (path.length === NUM_NOTES) {
       let urlNotes: Note[] = [];
       for (let i = 0; i < NUM_NOTES; i++) {
         const hexDigit = parseInt(path[i], NUM_NOTE_VALUES);
         if (isNaN(hexDigit)) {
-          // Bad hex digit, abort new array construction
+          // Bad hex digit, abort new array construction and redirect to base url
+          window.location.pathname = '/';
           return
         }
         else {
@@ -37,6 +39,11 @@ const App: FC = () => {
       }
       // @path is 16-character hex string - set notes
       setNotes(urlNotes);
+    }
+    else if (path.length !== 0) {
+      // Invalid path, redirect to the base page
+      console.log(path);
+      window.location.pathname = '/';
     }
   }, []);
 
